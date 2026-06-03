@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <div class="admin-layout">
+
+
+
+    <div class="sidebar">
+
+        <h1>Admin Panel</h1>
+
+
+
+        <button onclick="showSection('homeSection')">Home</button>
+
+        <button onclick="showSection('studentsSection')">Students List</button>
+
+        <button onclick="showSection('searchSection')">Search Student</button>
+
+        <button onclick="showSection('historySection')">Paid Fee History</button>
+
+        <button onclick="showSection('addStudentSection')">Add Student & Create Account</button>
+
+        <button onclick="showSection('addFeeSection')">Add Fee</button>
+
+        <button onclick="showSection('deleteSection')">Delete Fee & Delete Student</button>
+
+        <button onclick="showSection('totalSection')">Total Students & Amount</button>
+
+        <button onclick="logout()">Logout</button>
+
+    </div>
+
+    <div class="main-content">
+
+        <div id="homeSection" class="section">
+            <img src="images/download.jpg" width="400">
+            <h1>ENGINEERING COLLEGE</h1>
+
+            <h2>Admin Information</h2>
+            <p><b>Admin Name:</b> Fee Admin</p>
+            <p><b>Role:</b> Manage Students & Fees</p>
+        </div>
+
+        <div id="studentsSection" class="section" style="display:none;">
+            <h1>Students List</h1>
+            <button onclick="loadStudents()">View Students</button>
+            <div id="studentsList"></div>
+        </div>
+
+        <div id="searchSection" class="section" style="display:none;">
+            <h1>Search Student</h1>
+
+            <input type="text" id="searchHallticket" placeholder="Enter Hallticket Number">
+
+            <button onclick="searchStudent()">Search</button>
+
+            <div id="searchResult"></div>
+        </div>
+
+        <div id="historySection" class="section" style="display:none;">
+            <h1>Paid Fee History</h1>
+
+            <input type="text" id="historyHallticket" placeholder="Enter Hallticket Number">
+
+            <button onclick="searchHistory()">Search Paid History</button>
+
+            <div id="historyResult"></div>
+        </div>
+
+        <div id="addStudentSection" class="section" style="display:none;">
+            <h1>Add Student</h1>
+
+            <input type="text" id="studentName" placeholder="Student Name">
+            <input type="text" id="hallticketNo" placeholder="Hallticket Number">
+            <input type="text" id="mobileNumber" placeholder="Mobile Number">
+            <input type="text" id="branch" placeholder="Branch">
+            <input type="text" id="year" placeholder="Year">
+            <input type="number" id="tuitionFee" placeholder="Tuition Fee">
+            <input type="number" id="libraryFee" placeholder="Library Fee">
+            <input type="number" id="busFee" placeholder="Bus Fee">
+
+            <button onclick="addStudent()">Add Student</button>
+
+            <hr>
+
+            <h1>Create Student Account</h1>
+
+            <input type="text" id="accountHallticket" placeholder="Hallticket Number">
+            <input type="text" id="accountUsername" placeholder="Username">
+            <input type="password" id="accountPassword" placeholder="Password">
+
+            <button onclick="createStudentAccount()">Create Account</button>
+        </div>
+
+        <div id="addFeeSection" class="section" style="display:none;">
+            <h1>Add Fee</h1>
+
+            <input type="text" id="feeHallticket" placeholder="Enter Hallticket Number">
+
+            <button onclick="searchFeeStudent()">Search Student</button>
+
+            <div id="feeStudentDetails"></div>
+
+            <input type="number" id="addTuitionFee" placeholder="Tuition Fee">
+            <input type="number" id="addLibraryFee" placeholder="Library Fee">
+            <input type="number" id="addBusFee" placeholder="Bus Fee">
+
+            <button onclick="addFee()">Add Fee</button>
+        </div>
+
+        <div id="deleteSection" class="section" style="display:none;">
+            <h1>Delete Fee</h1>
+
+            <input type="text" id="deleteFeeHallticket" placeholder="Enter Hallticket Number">
+
+            <button onclick="searchDeleteFeeStudent()">Search Student</button>
+
+            <div id="deleteFeeStudentDetails"></div>
+
+            <select id="feeType">
+                <option value="">Select Fee Type</option>
+                <option value="tuition_fee">Tuition Fee</option>
+                <option value="library_fee">Library Fee</option>
+                <option value="bus_fee">Bus Fee</option>
+            </select>
+
+            <input type="number" id="deleteFeeAmount" placeholder="Enter Amount To Delete">
+
+            <button onclick="deleteFee()">Delete Fee</button>
+
+            <hr>
+
+            <h1>Delete Student</h1>
+
+            <input type="text" id="deleteStudentHallticket" placeholder="Enter Hallticket Number">
+
+            <button onclick="deleteStudent()">Delete Student</button>
+        </div>
+
+        <div id="totalSection" class="section" style="display:none;">
+            <h1>Total Students & Amount</h1>
+
+            <div class="cards">
+                <div class="card">
+                    <h2>Total Students</h2>
+                    <h3 id="totalStudents">0</h3>
+                </div>
+
+                <div class="card">
+                    <h2>Paid Fee</h2>
+                    <h3 id="paidFee">0</h3>
+                </div>
+
+                <div class="card">
+                    <h2>Due Fee</h2>
+                    <h3 id="dueFee">0</h3>
+                </div>
+            </div>
+
+            <button onclick="loadTotals()">Load Totals</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

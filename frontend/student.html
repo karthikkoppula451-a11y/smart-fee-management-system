@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+    <div class="sidebar">
+        <h1>Student Panel</h1>
+
+        <button onclick="showSection('studentHome')">Home</button>
+        <button onclick="showSection('studentDetailsSection')">Student Details</button>
+        <button onclick="showSection('checkFeeSection')">Check Fee</button>
+        <button onclick="showSection('payFeeSection')">Pay Fee</button>
+        <button onclick="showSection('receiptSection')">Paid History</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="main-content">
+
+        <div id="studentHome" class="section">
+            <img src="images/download.jpg" width="500">
+            <h2>Welcome Student</h2>
+            <p>Check Fee Details and Pay Fees</p>
+        </div>
+
+        <div id="studentDetailsSection" class="section" style="display:none;">
+            <h1>Student Details</h1>
+            <div id="studentDetails"></div>
+        </div>
+
+        <div id="checkFeeSection" class="section" style="display:none;">
+            <h1>Fee Details</h1>
+            <div id="studentFeeDetails"></div>
+        </div>
+
+        <div id="payFeeSection" class="section" style="display:none;">
+            <h1>Pay Fee</h1>
+
+            <input type="number" id="payAmount" placeholder="Enter Amount">
+
+            <br><br>
+
+            <img src="images/qr.jpeg" width="250">
+
+            <br><br>
+
+            <button onclick="studentPayFee()">Pay Fee</button>
+        </div>
+
+        <div id="receiptSection" class="section" style="display:none;">
+            <h1>Paid Fee History</h1>
+
+            <div id="studentHistory"></div>
+
+            <br>
+
+            <button onclick="downloadReceipt()">Download Receipt</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
