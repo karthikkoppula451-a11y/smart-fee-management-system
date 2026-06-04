@@ -37,7 +37,7 @@ function logout() {
 
 // VIEW STUDENTS
 async function loadStudents() {
-    const response = await fetch("http://localhost:5000/students");
+    const response = await fetch("https://smart-fee-management-system.onrender.com/students");
     const students = await response.json();
 
     let output = `
@@ -83,7 +83,7 @@ async function loadStudents() {
 async function searchStudent() {
     const hallticket = document.getElementById("searchHallticket").value;
 
-    const response = await fetch(`http://localhost:5000/student/${hallticket}`);
+    const response = await fetch(`https://smart-fee-management-system.onrender.com/student/${hallticket}`);
     const data = await response.json();
 
     if (data.length === 0) {
@@ -121,7 +121,7 @@ async function addStudent() {
     const library_fee = document.getElementById("libraryFee").value || 0;
     const bus_fee = document.getElementById("busFee").value || 0;
 
-    const response = await fetch("http://localhost:5000/add-student", {
+    const response = await fetch("https://smart-fee-management-system.onrender.com/add-student", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -155,7 +155,7 @@ async function createStudentAccount() {
         document.getElementById("accountPassword").value;
 
     const response = await fetch(
-        "http://localhost:5000/create-student-account",
+        "https://smart-fee-management-system.onrender.com/create-student-account",
         {
             method: "POST",
             headers: {
@@ -181,7 +181,7 @@ async function addFee() {
     const library_fee = document.getElementById("addLibraryFee").value || 0;
     const bus_fee = document.getElementById("addBusFee").value || 0;
 
-    const response = await fetch("http://localhost:5000/add-fee", {
+    const response = await fetch("https://smart-fee-management-system.onrender.com/add-fee", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -202,7 +202,7 @@ async function addFee() {
 async function searchHistory() {
     const hallticket = document.getElementById("historyHallticket").value;
 
-    const response = await fetch(`http://localhost:5000/history/${hallticket}`);
+    const response = await fetch(`https://smart-fee-management-system.onrender.com/history/${hallticket}`);
     const history = await response.json();
 
     if (history.length === 0) {
@@ -242,7 +242,7 @@ async function searchHistory() {
 async function searchDeleteFeeStudent() {
     const hallticket = document.getElementById("deleteFeeHallticket").value;
 
-    const response = await fetch(`http://localhost:5000/student/${hallticket}`);
+    const response = await fetch(`https://smart-fee-management-system.onrender.com/student/${hallticket}`);
     const data = await response.json();
 
     if (data.length === 0) {
@@ -272,7 +272,7 @@ async function deleteFee() {
     const feeType = document.getElementById("feeType").value;
     const amount = document.getElementById("deleteFeeAmount").value;
 
-    const response = await fetch("http://localhost:5000/delete-fee", {
+    const response = await fetch("https://smart-fee-management-system.onrender.com/delete-fee", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -293,7 +293,7 @@ async function deleteStudent() {
     const hallticket_no = document.getElementById("deleteStudentHallticket").value;
 
     const response = await fetch(
-        `http://localhost:5000/delete-student/${hallticket_no}`,
+        `https://smart-fee-management-system.onrender.com/delete-student/${hallticket_no}`,
         {
             method: "DELETE"
         }
@@ -305,7 +305,7 @@ async function deleteStudent() {
 
 // LOAD TOTALS
 async function loadTotals() {
-    const response = await fetch("http://localhost:5000/totals");
+    const response = await fetch("https://smart-fee-management-system.onrender.com/totals");
     const data = await response.json();
 
     document.getElementById("totalStudents").innerText = data.totalStudents;
@@ -356,7 +356,7 @@ async function studentLogin() {
     document.getElementById("studentPassword").value.trim();
 
     const response = await fetch(
-        "http://localhost:5000/student-login",
+        "https://smart-fee-management-system.onrender.com/student-login",
         {
             method: "POST",
             headers: {
@@ -392,7 +392,7 @@ async function loadStudentDetails() {
     const hallticket_no = localStorage.getItem("hallticket_no");
 
     const response = await fetch(
-        `http://localhost:5000/student/${hallticket_no}`
+        `https://smart-fee-management-system.onrender.com/student/${hallticket_no}`
     );
 
     const data = await response.json();
