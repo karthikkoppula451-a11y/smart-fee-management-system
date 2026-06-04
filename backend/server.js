@@ -258,6 +258,12 @@ app.post("/create-student-account", (req, res) => {
     });
 });
 
+
+app.get('/', (req, res) => {
+    res.send('Smart Fee Management System Backend Running');
+});
+
+
 app.listen(5000, () => {
     console.log("Server Running On Port 5000");
 });
