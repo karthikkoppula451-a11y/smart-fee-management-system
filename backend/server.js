@@ -1,22 +1,35 @@
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
+const path = require("path");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
+// Serve frontend
+app.use(express.static(path.join(__dirname, "frontend")));
+
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Karthik@1322",
-    database: "fee_management",
-    port: 3307
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT
 });
 
 db.connect((err) => {
-    if (err) console.log(err);
-    else console.log("MySQL Connected");
+    if (err) {
+        console.log("Database Error");
+        console.log(err);
+    } else {
+        console.log("MySQL Connected");
+    }
+});
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
 
 app.post("/add-student", (req, res) => {
@@ -186,15 +199,14 @@ app.post("/create-student-account", (req, res) => {
 
     db.query(sql, [hallticket_no, username, password], (err) => {
         if (err) {
-            res.json({ message: "Error: Username already exists" });
+            res.json({ message: "Error: " + err.sqlMessage });
         } else {
-            res.json({ message: "Student Account Created Successfully" });
+            res.json({ message: "Student Account Saved Successfully" });
         }
     });
 });
 
 app.post("/student-login", (req, res) => {
-
     const username = req.body.username.trim();
     const password = req.body.password.trim();
 
@@ -205,7 +217,6 @@ app.post("/student-login", (req, res) => {
     `;
 
     db.query(sql, [username, password], (err, result) => {
-
         if (err) {
             return res.json({
                 success: false,
@@ -225,44 +236,8 @@ app.post("/student-login", (req, res) => {
             message: "Login Successful",
             hallticket_no: result[0].hallticket_no
         });
-
-    });
-
-});
-
-app.post("/create-student-account", (req, res) => {
-
-    const { hallticket_no, username, password } = req.body;
-
-    console.log("ACCOUNT DATA:", req.body);
-
-    const sql = `
-        INSERT INTO student_accounts
-        (hallticket_no, username, password)
-        VALUES (?, ?, ?)
-    `;
-
-    db.query(sql, [hallticket_no, username, password], (err) => {
-
-        if (err) {
-            console.log(err);
-            res.json({
-                message: "Error: " + err.sqlMessage
-            });
-        } else {
-            res.json({
-                message: "Student Account Saved Successfully"
-            });
-        }
-
     });
 });
-
-
-app.get('/', (req, res) => {
-    res.send('Smart Fee Management System Backend Running');
-});
-
 
 app.listen(5000, () => {
     console.log("Server Running On Port 5000");
