@@ -7,9 +7,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-// Serve frontend
-app.use(express.static(path.join(__dirname, "frontend")));
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 const db = mysql.createConnection({
     host: process.env.MYSQLHOST,
@@ -29,7 +27,7 @@ db.connect((err) => {
 });
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "index.html"));
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 app.post("/add-student", (req, res) => {
@@ -237,6 +235,16 @@ app.post("/student-login", (req, res) => {
             hallticket_no: result[0].hallticket_no
         });
     });
+});
+
+app.post("/admin-login", (req, res) => {
+    const { username, password } = req.body;
+
+    if (username === "admin" && password === "admin123") {
+        res.json({ success: true, message: "Admin Login Successful" });
+    } else {
+        res.json({ success: false, message: "Invalid Admin Login" });
+    }
 });
 
 app.listen(5000, () => {
